@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-success font-weight-700">Profile Lembaga {{ auth()->user()->nama_lembaga }}</h1>
+<h1 class="h3 mb-4 text-success font-weight-700">Profile Lembaga {{ auth()->user()->name }}</h1>
 
 @if(session('status'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,14 +29,14 @@
 
         <div class="card shadow mb-4">
             <div class="card-profile-image mt-4">
-                <figure class="rounded-circle avatar avatar font-weight-bold" style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->nama_lembaga[0] }}"></figure>
+                <figure class="rounded-circle avatar avatar font-weight-bold" style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->name[0] }}"></figure>
             </div>
             <div class="card-body">
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <h5 class="font-weight-bold">{{ Auth::user()->nama_lembaga }}</h5>
+                            <h5 class="font-weight-bold">{{ Auth::user()->name }}</h5>
                             <p>Administrator</p>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
         <div class="card shadow mb-4">
 
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-success">Account {{ auth()->user()->nama_lembaga }}</h6>
+                <h6 class="m-0 font-weight-bold text-success">Account {{ auth()->user()->name }}</h6>
             </div>
 
             <div class="card-body">
@@ -88,7 +88,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group focused">
                                     <label class="form-control-label" for="name">Nama Lembaga<span class="small text-danger">*</span></label>
-                                    <input type="text" id="name" class="form-control" name="nama_lembaga" placeholder="Nama Lembaga" value="{{ old('nama_lembaga', Auth::user()->nama_lembaga) }}">
+                                    <input type="text" id="name" class="form-control" name="name" placeholder="Nama Lembaga" value="{{ old('name', Auth::user()->name) }}">
                                 </div>
                             </div>
 
