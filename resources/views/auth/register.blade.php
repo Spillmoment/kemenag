@@ -28,19 +28,34 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                        <input type="text" class="form-control form-control-user" name="name"
+                                            placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required>
+                                        <input type="email" class="form-control form-control-user" name="email"
+                                            placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}"
+                                            required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
+                                        <label for="">Jenis Lembaga</label>
+                                        <select class="form-control form-control-user" name="" id="">
+                                            <option>TPA</option>
+                                            <option>TPQ</option>
+                                            <option>MADIN</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
+                                        <input type="password" class="form-control form-control-user" name="password"
+                                            placeholder="{{ __('Password') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                            name="password_confirmation" placeholder="{{ __('Confirm Password') }}"
+                                            required>
                                     </div>
 
                                     <div class="form-group">
