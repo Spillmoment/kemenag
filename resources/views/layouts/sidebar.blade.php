@@ -79,7 +79,8 @@
     <!-- Pendaftar -->
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pendaftar</span>
         </a>
@@ -88,7 +89,7 @@
                 <h6 class="collapse-header">Jenis Lembaga</h6>
                 <a class="collapse-item" href="{{ route('pendaftar.tpa') }}">TPA</a>
                 <a class="collapse-item" href="{{ route('pendaftar.tpq') }}">TPQ</a>
-                <a class="collapse-item" href="{{ route('pendaftar.diniyah') }}">DINIYAH</a>
+                <a class="collapse-item" href="{{ route('pendaftar.madin') }}">MADIN</a>
             </div>
         </div>
     </li>

@@ -28,13 +28,13 @@ class PendaftarController extends Controller
         return view('admin.pendaftar.tpq', compact('users'));
     }
 
-    public function diniyah()
+    public function madin()
     {
         $users = User::with('lembaga')
             ->where('lembaga_id', 3)
             ->where('roles', 'user')
             ->get();
-        return view('admin.pendaftar.diniyah', compact('users'));
+        return view('admin.pendaftar.madin', compact('users'));
     }
 
     public function detail($id)

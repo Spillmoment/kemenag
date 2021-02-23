@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar Diniyah</h1>
+<h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar Madin</h1>
 
 @if(session('status'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,7 +54,8 @@
                         <td>{{ $user->lembaga->name }}</td>
 
                         <td>
-                            <a href="{{ route('pendaftar.detail', $user->id) }}" class="btn btn-success"> <i class="fas fa-eye    "></i> Detail</a>
+                            <a href="{{ route('pendaftar.detail', $user->id) }}" class="btn btn-success"> <i
+                                    class="fas fa-eye    "></i> Detail</a>
                         </td>
                     </tr>
 

@@ -39,8 +39,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">Jenis Lembaga</label>
-                                        <select class="form-control form-control-user" name="" id="">
+                                        <select class="form-control" name="" id="">
+                                            <option>Pilih Jenis Lembaga</option>
                                             <option>TPA</option>
                                             <option>TPQ</option>
                                             <option>MADIN</option>
