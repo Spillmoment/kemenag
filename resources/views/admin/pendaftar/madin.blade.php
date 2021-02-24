@@ -5,70 +5,103 @@
 <h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar Madin</h1>
 
 @if(session('status'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-    </button>
-    <strong>{{ session('status') }}</strong>
-</div>
-@endif
-@if ($errors->any())
-<div class="alert alert-danger border-left-danger" role="alert">
-    <ul class="pl-4 my-2">
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
+@push('scripts')
+<script>
+    swal({
+        title: "Success",
+        text: "{{session('status')}}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
 @endif
 
-<div class="row">
-
-
-    <div class="col-lg-8 order-lg-1">
-
-        <div class="card shadow mb-4">
-
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-success">Pendaftar</h6>
-            </div>
-
-            <table class="table table-bordered">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-success">Table Madin</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Tanggal Pendaftar</th>
+                        <th>Nama Lembaga</th>
                         <th>Email</th>
-                        <th>Jenis Lembaga</th>
+                        <th>Lembaga</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($users as $user)
+                    @foreach ($users as $regis)
                     <tr>
-                        <td scope="row">{{ $loop->iteration }}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->lembaga->name }}</td>
-
+                        <td scope="row"> {{$loop->iteration}} </td>
+                        <td>{{ $regis->created_at->format('d F Y') }}</td>
+                        <td>{{ $regis->name }}</td>
+                        <td>{{ $regis->email }}</td>
+                        <td>{{ $regis->lembaga->name }}</td>
                         <td>
-                            <a href="{{ route('pendaftar.detail', $user->id) }}" class="btn btn-success"> <i
-                                    class="fas fa-eye    "></i> Detail</a>
+                            @if($regis->status == 1)
+                            <span class="badge badge-success">
+                                Sudah Dikonfirmasi
+                            </span>
+                            @else
+                            <span class="badge badge-danger">
+                                Belum Dikonfirmasi
+                            </span>
+                            @endif
                         </td>
+                        <td>
+                            <a class="btn btn-info text-white btn-sm" href="{{route('pendaftar.detail',
+                           [$regis->id])}}"> <i class="fa fa-eye"></i></a>
+
+                            <form class="d-inline" action="{{route('pendaftar.destroy', [$regis->id])}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" id="deleteButton" data-name="{{ $regis->name }}"
+                                    class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+
                     </tr>
-
                     @endforeach
-
                 </tbody>
             </table>
-
-
         </div>
-
     </div>
-
 </div>
 
 @endsection
+
+@push('scripts')
+
+<script>
+    $('button#deleteButton').on('click', function (e) {
+        var name = $(this).data('name');
+        e.preventDefault();
+        swal({
+                title: "Yakin!",
+                text: "menghapus Pendaftar  " + name + "?",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: "OK",
+                },
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $(this).closest("form").submit();
+                }
+            });
+    });
+</script>
+@endpush
