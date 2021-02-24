@@ -39,15 +39,6 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <select class="form-control" name="" id="">
-                                            <option>Pilih Jenis Lembaga</option>
-                                            <option>TPA</option>
-                                            <option>TPQ</option>
-                                            <option>MADIN</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
                                         <input type="password" class="form-control form-control-user" name="password"
                                             placeholder="{{ __('Password') }}" required>
                                     </div>

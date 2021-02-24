@@ -34,6 +34,14 @@
             <span>{{ __('Profile') }}</span>
         </a>
     </li>
+   
+    <!-- Nav Item - Files -->
+    <li class="nav-item {{ Nav::isRoute('files') }}">
+        <a class="nav-link" href="{{ route('files') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>{{ __('Files') }}</span>
+        </a>
+    </li>
 
     <!-- Nav Item - About -->
     <li class="nav-item {{ Nav::isRoute('about') }}">
