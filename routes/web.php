@@ -24,11 +24,13 @@ Route::prefix('admin')
         Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
         Route::get('/profile', 'Admin\DashboardController@profile')->name('admin.profil');
         Route::put('/profile', 'Admin\DashboardController@update_profile')->name('admin.profile');
+        Route::get('/pendaftar', 'Admin\PendaftarController@baru')->name('pendaftar.baru');
         Route::get('/pendaftar/tpa', 'Admin\PendaftarController@tpa')->name('pendaftar.tpa');
         Route::get('/pendaftar/tpq', 'Admin\PendaftarController@tpq')->name('pendaftar.tpq');
         Route::get('/pendaftar/madin', 'Admin\PendaftarController@madin')->name('pendaftar.madin');
         Route::get('/pendaftar/{id}', 'Admin\PendaftarController@detail')->name('pendaftar.detail');
         Route::put('/pendaftar/{id}', 'Admin\PendaftarController@confirm')->name('pendaftar.confirm');
+        Route::delete('/pendaftar/{id}', 'Admin\PendaftarController@destroy')->name('pendaftar.destroy');
         Route::post('/surat/upload/{id}', 'Admin\SuratController@store')->name('surat.upload');
         Route::put('/surat/upload/{id}', 'Admin\SuratController@update')->name('surat.update');
     });
