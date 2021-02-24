@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Lembaga;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -16,37 +19,40 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('profile');
+        $getdata_lembaga = Lembaga::all();
+        return view('profile', compact('getdata_lembaga'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
-            'nama_lembaga' => 'required|string|max:255',
-            'alamat' => 'string|max:255',
+            // 'nama_lembaga' => 'required|string|max:255',
+            'lembaga_id' => 'required|exists:lembagas,id',
+            'alamat' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
-            'no_telp' => 'required|string',
+            'no_telp' => 'required|string|digits:12',
             'nama_pimpinan' => 'required|string|max:255',
             'tahun_berdiri' => 'required|date',
-            'susunan_pengurus' => 'required|string',
+            // 'susunan_pengurus' => 'required|string',
             'nama_pendiri' => 'required|string|max:255',
-            'jumlah_guru' => 'required|integer',
-            'jumlah_santri' => 'required|integer',
+            'jumlah_guru' => 'required|integer|min:0',
+            'jumlah_santri' => 'required|integer|min:0',
             'tempat_kbm' => 'required|string|max:255',
-            'jadwal_kegiatan' => 'required|string',
-            'foto_kegiatan' => 'required|string',
-            'link_fb' => 'required|string|max:255',
+            // 'jadwal_kegiatan' => 'required|string',
+            // 'foto_kegiatan' => 'required|string',
+            'link_fb' => 'nullable|string|max:255',
             'link_website' => 'nullable|string|max:255',
-            'current_password' => 'nullable|required_with:new_password',
-            'new_password' => 'nullable|min:8|max:12|required_with:current_password',
-            'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
+            // 'current_password' => 'nullable|required_with:new_password',
+            // 'new_password' => 'nullable|min:8|max:12|required_with:current_password',
+            // 'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
         ]);
 
-
         $user = User::findOrFail(Auth::user()->id);
-        $user->nama_lembaga = $request->input('nama_lembaga');
-        $user->email = $request->input('email');
+        $user->lembaga_id = $request->input('lembaga_id');
+        $user->name = $request->input('name');
+        $user->alamat = $request->input('alamat');
         $user->no_telp = $request->input('no_telp');
+        $user->email = $request->input('email');
         $user->nama_pimpinan = $request->input('nama_pimpinan');
         $user->tahun_berdiri = $request->input('tahun_berdiri');
         $user->susunan_pengurus = $request->input('susunan_pengurus');
@@ -70,5 +76,121 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('profile')->with(['status' => 'Profil berhasil diupdate']);
+    }
+
+    public function files()
+    {
+        return view('file');
+    }
+
+    public function updateFile(Request $request){
+        $id_lembaga = Auth::user()->id;
+        $cek_file_user = User::findOrFail($id_lembaga);
+
+        if (empty($cek_file_user->susunan_pengurus) && empty($cek_file_user->jadwal_kegiatan) && empty($cek_file_user->foto_kegiatan)) {
+            $request->validate([
+                'susunan_pengurus' => 'required|mimes:pdf',
+                'jadwal_kegiatan' => 'required|mimes:pdf',
+                'foto_kegiatan' => 'required|mimes:pdf',
+            ]);
+
+            $fullname_sunpeng = $request->file('susunan_pengurus')->getClientOriginalName();
+            $fullname_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalName();
+            $fullname_fotokeg = $request->file('foto_kegiatan')->getClientOriginalName();
+            
+            $filename_sunpeng = explode('.', $fullname_sunpeng)[0];
+            $filename_jadkeg = explode('.', $fullname_jadkeg)[0];
+            $filename_fotokeg = explode('.', $fullname_fotokeg)[0];
+            
+            $extension_sunpeng = $request->file('susunan_pengurus')->getClientOriginalExtension();
+            $extension_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalExtension();
+            $extension_fotokeg = $request->file('foto_kegiatan')->getClientOriginalExtension();
+
+            $add_filename_sunpeng = $filename_sunpeng.'_'.time().'.'.$extension_sunpeng;
+            $add_filename_jadkeg = $filename_jadkeg.'_'.time().'.'.$extension_jadkeg;
+            $add_filename_fotokeg = $filename_fotokeg.'_'.time().'.'.$extension_fotokeg;
+
+            $path = $request->file('susunan_pengurus')->storeAs('public/susunanPengurus',$add_filename_sunpeng);
+            $path = $request->file('jadwal_kegiatan')->storeAs('public/jadwalKegiatan',$add_filename_jadkeg);
+            $path = $request->file('foto_kegiatan')->storeAs('public/fotoKegiatan',$add_filename_fotokeg);
+            
+            $user = User::where('id', $id_lembaga)->update([
+                'susunan_pengurus' => $add_filename_sunpeng,
+                'jadwal_kegiatan' => $add_filename_jadkeg,
+                'foto_kegiatan' => $add_filename_fotokeg
+            ]);
+            session()->flash('status', 'File berhasil diupload');
+            return redirect()->back();
+        }
+
+        if ($request->file('susunan_pengurus')) {
+            $request->validate([
+                'susunan_pengurus' => 'mimes:pdf',
+            ]);
+
+            $fullname_sunpeng = $request->file('susunan_pengurus')->getClientOriginalName();
+            $filename_sunpeng = explode('.', $fullname_sunpeng)[0];
+            $extension_sunpeng = $request->file('susunan_pengurus')->getClientOriginalExtension();
+            $add_filename_sunpeng = $filename_sunpeng.'_'.time().'.'.$extension_sunpeng;
+
+            if ($cek_file_user->susunan_pengurus != null) {
+                unlink(storage_path('app/public/susunanPengurus/'.$cek_file_user->susunan_pengurus));
+            }
+
+            $path = $request->file('susunan_pengurus')->storeAs('public/susunanPengurus',$add_filename_sunpeng);
+            User::where('id', $id_lembaga)->update([
+                'susunan_pengurus' => $add_filename_sunpeng
+            ]);
+
+            session()->flash('status', 'File susunan pengurus berhasil diubah');
+            return redirect()->back();
+        }
+        
+        if ($request->file('jadwal_kegiatan')) {
+            $request->validate([
+                'jadwal_kegiatan' => 'mimes:pdf',
+            ]);
+
+            $fullname_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalName();
+            $filename_jadkeg = explode('.', $fullname_jadkeg)[0];
+            $extension_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalExtension();
+            $add_filename_jadkeg = $filename_jadkeg.'_'.time().'.'.$extension_jadkeg;
+
+            if ($cek_file_user->jadwal_kegiatan != null) {
+                unlink(storage_path('app/public/jadwalKegiatan/'.$cek_file_user->jadwal_kegiatan));
+            }
+
+            $path = $request->file('jadwal_kegiatan')->storeAs('public/jadwalKegiatan',$add_filename_jadkeg);
+            User::where('id', $id_lembaga)->update([
+                'jadwal_kegiatan' => $add_filename_jadkeg,
+            ]);
+
+            session()->flash('status', 'File jadwal kegiatan berhasil diubah');
+            return redirect()->back();
+        }
+        
+        if ($request->file('foto_kegiatan')) {
+            $request->validate([
+                'foto_kegiatan' => 'mimes:pdf',
+            ]);
+
+            $fullname_fotokeg = $request->file('foto_kegiatan')->getClientOriginalName();
+            $filename_fotokeg = explode('.', $fullname_fotokeg)[0];
+            $extension_fotokeg = $request->file('foto_kegiatan')->getClientOriginalExtension();
+            $add_filename_fotokeg = $filename_fotokeg.'_'.time().'.'.$extension_fotokeg;
+
+            if ($cek_file_user->foto_kegiatan != null) {
+                unlink(storage_path('app/public/fotoKegiatan/'.$cek_file_user->foto_kegiatan));
+            }
+
+            $path = $request->file('foto_kegiatan')->storeAs('public/fotoKegiatan',$add_filename_fotokeg);
+            User::where('id', $id_lembaga)->update([
+                'foto_kegiatan' => $add_filename_fotokeg,
+            ]);
+
+            session()->flash('status', 'File foto kegiatan berhasil diubah');
+            return redirect()->back();
+        }
+
     }
 }
