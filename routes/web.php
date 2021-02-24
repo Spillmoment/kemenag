@@ -3,17 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'Auth\LoginController@index');
 
 Auth::routes();
@@ -33,6 +22,8 @@ Route::prefix('admin')
     ->middleware('admin')
     ->group(function () {
         Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
+        Route::get('/profile', 'Admin\DashboardController@profile')->name('admin.profil');
+        Route::put('/profile', 'Admin\DashboardController@update_profile')->name('admin.profile');
         Route::get('/pendaftar/tpa', 'Admin\PendaftarController@tpa')->name('pendaftar.tpa');
         Route::get('/pendaftar/tpq', 'Admin\PendaftarController@tpq')->name('pendaftar.tpq');
         Route::get('/pendaftar/madin', 'Admin\PendaftarController@madin')->name('pendaftar.madin');
