@@ -13,6 +13,8 @@ Route::prefix('user')
         Route::get('/', 'HomeController@index')->name('home');
         Route::get('/profile', 'ProfileController@index')->name('profile');
         Route::put('/profile', 'ProfileController@update')->name('profile.update');
+        Route::get('/files', 'ProfileController@files')->name('files');
+        Route::put('/files', 'ProfileController@updateFile')->name('files.update');
         Route::get('/about', function () {
             return view('about');
         })->name('about');
