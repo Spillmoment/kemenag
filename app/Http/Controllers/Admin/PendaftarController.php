@@ -6,16 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Lembaga;
 use Illuminate\Http\Request;
 use App\User;
+use Yajra\DataTables\Facades\DataTables;
 
 class PendaftarController extends Controller
 {
+
+    public function baru()
+    {
+        $users = User::with('lembaga')
+            ->where('roles', 'user')
+            ->whereNull('lembaga_id')
+            ->get();
+        return view('admin.pendaftar.baru', compact('users'));
+    }
+
     public function tpa()
     {
         $users = User::with('lembaga')
             ->where('lembaga_id', 1)
             ->where('roles', 'user')
             ->get();
-        // dd($users);
         return view('admin.pendaftar.tpa', compact('users'));
     }
 
@@ -40,7 +50,6 @@ class PendaftarController extends Controller
     public function detail($id)
     {
         $user = User::with('lembaga')->findOrFail($id);
-        // dd($users);
         return view('admin.pendaftar.detail', compact('user'));
     }
 
@@ -53,5 +62,13 @@ class PendaftarController extends Controller
         } catch (\Exception $e) {
             return redirect()->back();
         }
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        session()->flash('status', 'User ' . $user->name . ' Berhasil dihapus');
+        return redirect()->back();
     }
 }
