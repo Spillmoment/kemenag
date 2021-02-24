@@ -83,7 +83,8 @@ class ProfileController extends Controller
         return view('file');
     }
 
-    public function updateFile(Request $request){
+    public function updateFile(Request $request)
+    {
         $id_lembaga = Auth::user()->id;
         $cek_file_user = User::findOrFail($id_lembaga);
 
@@ -97,23 +98,23 @@ class ProfileController extends Controller
             $fullname_sunpeng = $request->file('susunan_pengurus')->getClientOriginalName();
             $fullname_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalName();
             $fullname_fotokeg = $request->file('foto_kegiatan')->getClientOriginalName();
-            
+
             $filename_sunpeng = explode('.', $fullname_sunpeng)[0];
             $filename_jadkeg = explode('.', $fullname_jadkeg)[0];
             $filename_fotokeg = explode('.', $fullname_fotokeg)[0];
-            
+
             $extension_sunpeng = $request->file('susunan_pengurus')->getClientOriginalExtension();
             $extension_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalExtension();
             $extension_fotokeg = $request->file('foto_kegiatan')->getClientOriginalExtension();
 
-            $add_filename_sunpeng = $filename_sunpeng.'_'.time().'.'.$extension_sunpeng;
-            $add_filename_jadkeg = $filename_jadkeg.'_'.time().'.'.$extension_jadkeg;
-            $add_filename_fotokeg = $filename_fotokeg.'_'.time().'.'.$extension_fotokeg;
+            $add_filename_sunpeng = $filename_sunpeng . '_' . time() . '.' . $extension_sunpeng;
+            $add_filename_jadkeg = $filename_jadkeg . '_' . time() . '.' . $extension_jadkeg;
+            $add_filename_fotokeg = $filename_fotokeg . '_' . time() . '.' . $extension_fotokeg;
 
-            $path = $request->file('susunan_pengurus')->storeAs('public/susunanPengurus',$add_filename_sunpeng);
-            $path = $request->file('jadwal_kegiatan')->storeAs('public/jadwalKegiatan',$add_filename_jadkeg);
-            $path = $request->file('foto_kegiatan')->storeAs('public/fotoKegiatan',$add_filename_fotokeg);
-            
+            $path = $request->file('susunan_pengurus')->storeAs('public/susunanPengurus', $add_filename_sunpeng);
+            $path = $request->file('jadwal_kegiatan')->storeAs('public/jadwalKegiatan', $add_filename_jadkeg);
+            $path = $request->file('foto_kegiatan')->storeAs('public/fotoKegiatan', $add_filename_fotokeg);
+
             $user = User::where('id', $id_lembaga)->update([
                 'susunan_pengurus' => $add_filename_sunpeng,
                 'jadwal_kegiatan' => $add_filename_jadkeg,
@@ -131,13 +132,13 @@ class ProfileController extends Controller
             $fullname_sunpeng = $request->file('susunan_pengurus')->getClientOriginalName();
             $filename_sunpeng = explode('.', $fullname_sunpeng)[0];
             $extension_sunpeng = $request->file('susunan_pengurus')->getClientOriginalExtension();
-            $add_filename_sunpeng = $filename_sunpeng.'_'.time().'.'.$extension_sunpeng;
+            $add_filename_sunpeng = $filename_sunpeng . '_' . time() . '.' . $extension_sunpeng;
 
             if ($cek_file_user->susunan_pengurus != null) {
-                unlink(storage_path('app/public/susunanPengurus/'.$cek_file_user->susunan_pengurus));
+                unlink(storage_path('app/public/susunanPengurus/' . $cek_file_user->susunan_pengurus));
             }
 
-            $path = $request->file('susunan_pengurus')->storeAs('public/susunanPengurus',$add_filename_sunpeng);
+            $path = $request->file('susunan_pengurus')->storeAs('public/susunanPengurus', $add_filename_sunpeng);
             User::where('id', $id_lembaga)->update([
                 'susunan_pengurus' => $add_filename_sunpeng
             ]);
@@ -145,7 +146,7 @@ class ProfileController extends Controller
             session()->flash('status', 'File susunan pengurus berhasil diubah');
             return redirect()->back();
         }
-        
+
         if ($request->file('jadwal_kegiatan')) {
             $request->validate([
                 'jadwal_kegiatan' => 'mimes:pdf',
@@ -154,13 +155,13 @@ class ProfileController extends Controller
             $fullname_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalName();
             $filename_jadkeg = explode('.', $fullname_jadkeg)[0];
             $extension_jadkeg = $request->file('jadwal_kegiatan')->getClientOriginalExtension();
-            $add_filename_jadkeg = $filename_jadkeg.'_'.time().'.'.$extension_jadkeg;
+            $add_filename_jadkeg = $filename_jadkeg . '_' . time() . '.' . $extension_jadkeg;
 
             if ($cek_file_user->jadwal_kegiatan != null) {
-                unlink(storage_path('app/public/jadwalKegiatan/'.$cek_file_user->jadwal_kegiatan));
+                unlink(storage_path('app/public/jadwalKegiatan/' . $cek_file_user->jadwal_kegiatan));
             }
 
-            $path = $request->file('jadwal_kegiatan')->storeAs('public/jadwalKegiatan',$add_filename_jadkeg);
+            $path = $request->file('jadwal_kegiatan')->storeAs('public/jadwalKegiatan', $add_filename_jadkeg);
             User::where('id', $id_lembaga)->update([
                 'jadwal_kegiatan' => $add_filename_jadkeg,
             ]);
@@ -168,7 +169,7 @@ class ProfileController extends Controller
             session()->flash('status', 'File jadwal kegiatan berhasil diubah');
             return redirect()->back();
         }
-        
+
         if ($request->file('foto_kegiatan')) {
             $request->validate([
                 'foto_kegiatan' => 'mimes:pdf',
@@ -177,13 +178,13 @@ class ProfileController extends Controller
             $fullname_fotokeg = $request->file('foto_kegiatan')->getClientOriginalName();
             $filename_fotokeg = explode('.', $fullname_fotokeg)[0];
             $extension_fotokeg = $request->file('foto_kegiatan')->getClientOriginalExtension();
-            $add_filename_fotokeg = $filename_fotokeg.'_'.time().'.'.$extension_fotokeg;
+            $add_filename_fotokeg = $filename_fotokeg . '_' . time() . '.' . $extension_fotokeg;
 
             if ($cek_file_user->foto_kegiatan != null) {
-                unlink(storage_path('app/public/fotoKegiatan/'.$cek_file_user->foto_kegiatan));
+                unlink(storage_path('app/public/fotoKegiatan/' . $cek_file_user->foto_kegiatan));
             }
 
-            $path = $request->file('foto_kegiatan')->storeAs('public/fotoKegiatan',$add_filename_fotokeg);
+            $path = $request->file('foto_kegiatan')->storeAs('public/fotoKegiatan', $add_filename_fotokeg);
             User::where('id', $id_lembaga)->update([
                 'foto_kegiatan' => $add_filename_fotokeg,
             ]);
@@ -191,6 +192,5 @@ class ProfileController extends Controller
             session()->flash('status', 'File foto kegiatan berhasil diubah');
             return redirect()->back();
         }
-
     }
 }
