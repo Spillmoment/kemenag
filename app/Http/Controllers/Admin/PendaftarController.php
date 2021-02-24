@@ -15,7 +15,6 @@ class PendaftarController extends Controller
             ->where('lembaga_id', 1)
             ->where('roles', 'user')
             ->get();
-        // dd($users);
         return view('admin.pendaftar.tpa', compact('users'));
     }
 
