@@ -78,7 +78,7 @@
 
     <!-- Pendaftar -->
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('admin/pendaftar/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -86,10 +86,16 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Jenis Lembaga</h6>
-                <a class="collapse-item" href="{{ route('pendaftar.tpa') }}">TPA</a>
-                <a class="collapse-item" href="{{ route('pendaftar.tpq') }}">TPQ</a>
-                <a class="collapse-item" href="{{ route('pendaftar.madin') }}">MADIN</a>
+                <h6 class="collapse-header">Pendaftar Baru</h6>
+                <a class="collapse-item {{ request()->is('admin/pendaftar') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.baru') }}">Pendaftar</a>
+                <h6 class="collapse-header">Lembaga</h6>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/tpa*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.tpa') }}">TPA</a>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/tpq*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.tpq') }}">TPQ</a>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/madin*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.madin') }}">MADIN</a>
             </div>
         </div>
     </li>
