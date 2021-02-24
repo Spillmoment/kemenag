@@ -2,16 +2,21 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar</h1>
+<h1 class="h3 mb-4 text-success font-weight-700">Detail Pendaftar {{ $user->name }} </h1>
 
 @if(session('status'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-    </button>
-    <strong>{{ session('status') }}</strong>
-</div>
+@push('scripts')
+<script>
+    swal({
+        title: "Success",
+        text: "{{session('status')}}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
 @endif
 
 <div class="row">
@@ -22,10 +27,10 @@
         <div class="card shadow mb-4">
 
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-success">Pendaftar</h6>
+                <h6 class="m-0 font-weight-bold text-success">Detail {{ $user->name }}</h6>
             </div>
 
-            <table class="table">
+            <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th> Nama Lembaga </th>
@@ -33,11 +38,33 @@
                     </tr>
                     <tr>
                         <th>Jenis Lembaga</th>
-                        <th> {{ $user->lembaga->name }} </th>
+                        <th> {{ $user->lembaga->name ? $user->lembaga->name : 'belum diisi' }} </th>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+                        <th> Email </th>
+                        <th>{{ $user->email }} </th>
+                    </tr>
+
+                    <tr>
+                        <th> Tanggal Pendaftar </th>
+                        <th>{{ $user->created_at->format('d F Y') }} </th>
                     </tr>
                     <tr>
                         <th>Status </th>
-                        <th>{{ $user->status }} </th>
+                        <th>
+                            @if($user->status == 1)
+                            <span class="badge badge-success">
+                                Sudah Dikonfirmasi
+                            </span>
+                            @else
+                            <span class="badge badge-danger">
+                                Belum Dikonfirmasi
+                            </span>
+                            @endif
+                        </th>
                     </tr>
                 </thead>
             </table>
@@ -46,7 +73,7 @@
                     @csrf
                     @method('PUT')
                     @if($user->status != '1')
-                    <button class="btn btn-success btn-block">
+                    <button class="btn btn-success btn-block" id="check" data-name="{{ $user->name }}">
                         <i class="fas fa-check"></i>
                         Konfirmasi
                     </button>
@@ -119,3 +146,26 @@
 </div>
 
 @endsection
+@push('scripts')
+<script>
+    $('button#check').on('click', function (e) {
+        var name = $(this).data('name');
+        e.preventDefault();
+        swal({
+                title: "Yakin!",
+                text: "Konfirmasi Pendaftar  " + name + "?",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: "OK",
+                },
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $(this).closest("form").submit();
+                }
+            });
+    });
+</script>
+@endpush
