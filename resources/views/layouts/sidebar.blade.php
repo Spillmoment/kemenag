@@ -67,8 +67,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ Nav::isRoute('home') }}">
-        <a class="nav-link" href="{{ route('home') }}">
+    <li class="nav-item {{ Nav::isRoute('dashboard') }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{ __('Dashboard') }}</span></a>
     </li>
