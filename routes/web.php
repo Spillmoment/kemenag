@@ -15,6 +15,8 @@ Route::prefix('user')
         Route::put('/profile', 'ProfileController@update')->name('profile.update');
         Route::get('/files', 'ProfileController@files')->name('files');
         Route::put('/files', 'ProfileController@updateFile')->name('files.update');
+        Route::get('/chage-password', 'ProfileController@changePassword')->name('changepassword');
+        Route::put('/chage-password', 'ProfileController@setChangePassword')->name('changepassword.update');
         Route::get('/about', function () {
             return view('about');
         })->name('about');

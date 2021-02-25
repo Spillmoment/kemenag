@@ -46,26 +46,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="row">
-                    <div class="col-md-4">
-                        <div class="card-profile-stats">
-                            <span class="heading">22</span>
-                            <span class="description">Friends</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card-profile-stats">
-                            <span class="heading">10</span>
-                            <span class="description">Photos</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card-profile-stats">
-                            <span class="heading">89</span>
-                            <span class="description">Comments</span>
-                        </div>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
 
@@ -86,72 +67,77 @@
                     @csrf
                     @method('PUT')
 
+                    <div class="card mb-2">
+                        <div
+                            class="card-header {{ $cek_file_user->susunan_pengurus != null ? 'bg-success text-white' : 'bg-warning text-dark' }}">
+                            <strong>Susunan Pengurus
+                                {{ $cek_file_user->susunan_pengurus != null ? '(File tersimpan)' : '(File masih kosong)' }}</strong>
+
+                        </div>
+                        <div class="card-body">
+                            @if ($cek_file_user->susunan_pengurus != null)
+                            <h6><strong>File Anda: <a
+                                        href="/storage/susunanPengurus/{{ Auth::user()->susunan_pengurus }}"
+                                        class="text-dark"
+                                        target="_blank">{{ $cek_file_user->susunan_pengurus }}</a></strong>
+                            </h6>
+                            @endif
+                            <div class="form-group focused">
+                                <input type="file" id="susunan_pengurus" class="form-control-file"
+                                    name="susunan_pengurus">
+                                <small>Kosongkan jika tidak mengubah file pdf</small>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card mb-2">
+                        <div
+                            class="card-header {{ $cek_file_user->jadwal_kegiatan != null ? 'bg-success text-white' : 'bg-warning text-dark' }}">
+                            <strong>Jadwal Kegiatan
+                                {{ $cek_file_user->jadwal_kegiatan != null ? '(File tersimpan)' : '(File masih kosong)' }}</strong>
+                        </div>
+                        <div class="card-body">
+                            @if ($cek_file_user->jadwal_kegiatan != null)
+                            <h6><strong>File Anda: <a href="/storage/jadwalKegiatan/{{ Auth::user()->jadwal_kegiatan }}"
+                                        class="text-dark"
+                                        target="_blank">{{ $cek_file_user->jadwal_kegiatan }}</a></strong>
+                            </h6>
+                            @endif
+                            <div class="form-group focused">
+                                <input type="file" id="jadwal_kegiatan" class="form-control-file" name="jadwal_kegiatan"
+                                    value="{{ $cek_file_user->jadwal_kegiatan }}">
+                                <small>Kosongkan jika tidak mengubah file pdf</small>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2">
+                        <div
+                            class="card-header {{ $cek_file_user->foto_kegiatan != null ? 'bg-success text-white' : 'bg-warning text-dark' }}">
+                            <strong> Foto Kegiatan
+                                {{ $cek_file_user->foto_kegiatan != null ? '(File tersimpan)' : '(File masih kosong)' }}</strong>
+                        </div>
+                        <div class="card-body">
+                            @if ($cek_file_user->foto_kegiatan != null)
+                            <h6><strong>File Anda: <a href="/storage/fotoKegiatan/{{ Auth::user()->foto_kegiatan }}"
+                                        class="text-dark"
+                                        target="_blank">{{ $cek_file_user->foto_kegiatan }}</a></strong>
+                            </h6>
+                            @endif
+                            <div class="form-group focused">
+                                <input type="file" id="foto_kegiatan" class="form-control-file" name="foto_kegiatan"
+                                    value="{{ $cek_file_user->foto_kegiatan }}">
+                                <small>Kosongkan jika tidak mengubah file pdf</small>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="pl-lg-4">
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="susunan_pengurus">Susunan Pengurus<span
-                                            class="small text-danger">*</span></label>
-                                    <input type="file" id="susunan_pengurus" class="form-control-file"
-                                        name="susunan_pengurus">
-                                    <small>Kosongkan jika tidak mengubah file pdf</small>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="jadwal_kegiatan">Jadwal Kegiatan<span
-                                            class="small text-danger">*</span></label>
-                                    <input type="file" id="jadwal_kegiatan" class="form-control-file"
-                                        name="jadwal_kegiatan">
-                                    <small>Kosongkan jika tidak mengubah file pdf</small>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="foto_kegiatan">Foto Kegiatan<span
-                                            class="small text-danger">*</span></label>
-                                    <input type="file" id="foto_kegiatan" class="form-control-file"
-                                        name="foto_kegiatan">
-                                    <small>Kosongkan jika tidak mengubah file pdf</small>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
-                        {{-- <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="current_password">Current password</label>
-                                    <input type="password" id="current_password" class="form-control"
-                                        name="current_password" placeholder="Current password">
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="new_password">New password</label>
-                                    <input type="password" id="new_password" class="form-control" name="new_password"
-                                        placeholder="New password">
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="confirm_password">Confirm password</label>
-                                    <input type="password" id="confirm_password" class="form-control"
-                                        name="password_confirmation" placeholder="Confirm password">
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <!-- Button -->
