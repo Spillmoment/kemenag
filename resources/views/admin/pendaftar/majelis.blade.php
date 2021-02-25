@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar TPQ</h1>
+<h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar Majelis Taklim</h1>
 
 @if(session('status'))
 @push('scripts')
@@ -21,7 +21,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-success">Table TPQ</h6>
+        <h6 class="m-0 font-weight-bold text-success">Table Majelis Taklim</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">

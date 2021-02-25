@@ -90,12 +90,12 @@
                 <a class="collapse-item {{ request()->is('admin/pendaftar') ? 'active' : '' }}"
                     href="{{ route('pendaftar.baru') }}">Pendaftar</a>
                 <h6 class="collapse-header">Lembaga</h6>
-                <a class="collapse-item {{ request()->is('admin/pendaftar/tpa*') ? 'active' : '' }}"
-                    href="{{ route('pendaftar.tpa') }}">TPA</a>
-                <a class="collapse-item {{ request()->is('admin/pendaftar/tpq*') ? 'active' : '' }}"
-                    href="{{ route('pendaftar.tpq') }}">TPQ</a>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/tpa-tpq*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.tpa') }}">TPA/TPQ</a>
                 <a class="collapse-item {{ request()->is('admin/pendaftar/madin*') ? 'active' : '' }}"
                     href="{{ route('pendaftar.madin') }}">MADIN</a>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/tpq*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.majlis') }}">Majelis Taklim</a>
             </div>
         </div>
     </li>

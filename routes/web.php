@@ -27,9 +27,9 @@ Route::prefix('admin')
         Route::get('/profile', 'Admin\DashboardController@profile')->name('admin.profil');
         Route::put('/profile', 'Admin\DashboardController@update_profile')->name('admin.profile');
         Route::get('/pendaftar', 'Admin\PendaftarController@baru')->name('pendaftar.baru');
-        Route::get('/pendaftar/tpa', 'Admin\PendaftarController@tpa')->name('pendaftar.tpa');
-        Route::get('/pendaftar/tpq', 'Admin\PendaftarController@tpq')->name('pendaftar.tpq');
+        Route::get('/pendaftar/tpa-tpq', 'Admin\PendaftarController@tpa')->name('pendaftar.tpa');
         Route::get('/pendaftar/madin', 'Admin\PendaftarController@madin')->name('pendaftar.madin');
+        Route::get('/pendaftar/majelis-taklim', 'Admin\PendaftarController@majelis_taklim')->name('pendaftar.majlis');
         Route::get('/pendaftar/{id}', 'Admin\PendaftarController@detail')->name('pendaftar.detail');
         Route::put('/pendaftar/{id}', 'Admin\PendaftarController@confirm')->name('pendaftar.confirm');
         Route::delete('/pendaftar/{id}', 'Admin\PendaftarController@destroy')->name('pendaftar.destroy');
