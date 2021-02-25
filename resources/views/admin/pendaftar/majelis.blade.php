@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('title','Pendaftar Majelis')
 @section('main-content')
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar Majelis Taklim</h1>

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('title','Pendaftar Madin')
 @section('main-content')
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar Madin</h1>

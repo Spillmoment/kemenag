@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title','Detail User')
 @section('main-content')
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-success font-weight-700">Detail Pendaftar {{ $user->name }} </h1>
