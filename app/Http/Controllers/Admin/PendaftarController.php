@@ -7,6 +7,7 @@ use App\Lembaga;
 use Illuminate\Http\Request;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
+use App\Surat;
 
 class PendaftarController extends Controller
 {
@@ -29,23 +30,25 @@ class PendaftarController extends Controller
         return view('admin.pendaftar.tpa', compact('users'));
     }
 
-    public function tpq()
+    public function madin()
     {
         $users = User::with('lembaga')
             ->where('lembaga_id', 2)
             ->where('roles', 'user')
             ->get();
-        return view('admin.pendaftar.tpq', compact('users'));
+        return view('admin.pendaftar.madin', compact('users'));
     }
 
-    public function madin()
+    public function majelis_taklim()
     {
         $users = User::with('lembaga')
             ->where('lembaga_id', 3)
             ->where('roles', 'user')
             ->get();
-        return view('admin.pendaftar.madin', compact('users'));
+        return view('admin.pendaftar.majelis', compact('users'));
     }
+
+
 
     public function detail($id)
     {
@@ -68,6 +71,25 @@ class PendaftarController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+
+        if ($user->surat->file != null) {
+            unlink(storage_path('app/public/file/' . $user->surat->file));
+        }
+
+        if ($user->foto_kegiatan != null) {
+            unlink(storage_path('app/public/fotoKegiatan/' . $user->foto_kegiatan));
+        }
+
+        if ($user->jadwal_kegiatan != null) {
+            unlink(storage_path('app/public/jadwalKegiatan/' . $user->jadwal_kegiatan));
+        }
+
+        if ($user->susunan_pengurus != null) {
+            unlink(storage_path('app/public/susunanPengurus/' . $user->susunanPengurus));
+        }
+
+        Surat::where('id', $user->surat_id)->delete();
+
         session()->flash('status', 'User ' . $user->name . ' Berhasil dihapus');
         return redirect()->back();
     }

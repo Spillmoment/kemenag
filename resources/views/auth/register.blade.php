@@ -7,11 +7,14 @@
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6 d-none d-lg-block bg-image"
+                            style="background-image:url({{url('img/logo/utama.jpeg')}})"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Register') }}</h1>
+                                    <h1 class="h3 text-success mb-4 font-weight-900">
+                                        {{ __('Pendaftaran Online TPA/TPQ, Madin & Majelis Taklim Kemenag Bantul') }}
+                                    </h1>
                                 </div>
 
                                 @if ($errors->any())
@@ -29,13 +32,13 @@
 
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="name"
-                                            placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                            placeholder="{{ __('Nama Lembaga') }}" value="{{ old('name') }}" required
+                                            autofocus>
                                     </div>
 
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email"
-                                            placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}"
-                                            required>
+                                            placeholder="{{ __('Alamat Email') }}" value="{{ old('email') }}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -45,13 +48,13 @@
 
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            name="password_confirmation" placeholder="{{ __('Confirm Password') }}"
+                                            name="password_confirmation" placeholder="{{ __('Konfirmasi Password') }}"
                                             required>
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            {{ __('Register') }}
+                                        <button type="submit" class="btn btn-success btn-user btn-block">
+                                            {{ __('Daftar') }}
                                         </button>
                                     </div>
                                 </form>
@@ -59,8 +62,8 @@
                                 <hr>
 
                                 <div class="text-center">
-                                    <a class="small" href="{{ route('login') }}">
-                                        {{ __('Already have an account? Login!') }}
+                                    <a class="big text-success font-weight-700" href="{{ route('login') }}">
+                                        {{ __('Sudah mempunyai account? Login!') }}
                                     </a>
                                 </div>
                             </div>

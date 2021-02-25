@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-book"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Kemenag</div>
+        <div class="sidebar-brand-text mx-3">Kemenag Bantul</div>
     </a>
 
     <!-- Divider -->
@@ -34,20 +34,12 @@
             <span>{{ __('Profile') }}</span>
         </a>
     </li>
-   
+
     <!-- Nav Item - Files -->
     <li class="nav-item {{ Nav::isRoute('files') }}">
         <a class="nav-link" href="{{ route('files') }}">
             <i class="fas fa-fw fa-file"></i>
             <span>{{ __('Files') }}</span>
-        </a>
-    </li>
-
-    <!-- Nav Item - About -->
-    <li class="nav-item {{ Nav::isRoute('about') }}">
-        <a class="nav-link" href="{{ route('about') }}">
-            <i class="fas fa-fw fa-hands-helping"></i>
-            <span>{{ __('About') }}</span>
         </a>
     </li>
 
@@ -98,12 +90,12 @@
                 <a class="collapse-item {{ request()->is('admin/pendaftar') ? 'active' : '' }}"
                     href="{{ route('pendaftar.baru') }}">Pendaftar</a>
                 <h6 class="collapse-header">Lembaga</h6>
-                <a class="collapse-item {{ request()->is('admin/pendaftar/tpa*') ? 'active' : '' }}"
-                    href="{{ route('pendaftar.tpa') }}">TPA</a>
-                <a class="collapse-item {{ request()->is('admin/pendaftar/tpq*') ? 'active' : '' }}"
-                    href="{{ route('pendaftar.tpq') }}">TPQ</a>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/tpa-tpq*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.tpa') }}">TPA/TPQ</a>
                 <a class="collapse-item {{ request()->is('admin/pendaftar/madin*') ? 'active' : '' }}"
                     href="{{ route('pendaftar.madin') }}">MADIN</a>
+                <a class="collapse-item {{ request()->is('admin/pendaftar/tpq*') ? 'active' : '' }}"
+                    href="{{ route('pendaftar.majlis') }}">Majelis Taklim</a>
             </div>
         </div>
     </li>
