@@ -24,7 +24,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        {{ __('Settings') }}
+        {{ __('Informasi User') }}
     </div>
 
     <!-- Nav Item - Profile -->
@@ -43,6 +43,14 @@
         </a>
     </li>
 
+    <!-- Nav Item - Files -->
+    <li class="nav-item {{ Nav::isRoute('changepassword') }}">
+        <a class="nav-link" href="{{ route('changepassword') }}">
+            <i class="fas fa-fw fa-key"></i>
+            <span>{{ __('Ubah Password') }}</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -52,6 +60,7 @@
     </div>
 
 </ul>
+
 @elsecan('isAdmin')
 <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -60,7 +69,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-book"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Kemenag</div>
+        <div class="sidebar-brand-text mx-3">Kemenag Bantul</div>
     </a>
 
     <!-- Divider -->
