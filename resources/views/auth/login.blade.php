@@ -11,7 +11,9 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1>
+                                    <h1 class="h3 text-success mb-4 font-weight-900">
+                                        {{ __('Pendaftaran Online TPA/TPQ, Madin & Majelis Taklim Kemenag Bantul') }}
+                                    </h1>
                                 </div>
 
                                 @if ($errors->any())
@@ -29,7 +31,7 @@
 
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email"
-                                            placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required
+                                            placeholder="{{ __('Alamat Email') }}" value="{{ old('email') }}" required
                                             autofocus>
                                     </div>
 
@@ -48,7 +50,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-success btn-user btn-block">
                                             {{ __('Login') }}
                                         </button>
                                     </div>
@@ -59,26 +61,26 @@
 
                                     <hr>
 
-                                    @if (Route::has('password.request'))
+                                    {{-- @if (Route::has('password.request'))
                                     <div class="text-center">
                                         <a class="small" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Password?') }}
-                                        </a>
-                                    </div>
-                                    @endif
-
-                                    @if (Route::has('register'))
-                                    <div class="text-center">
-                                        <a class="small"
-                                            href="{{ route('register') }}">{{ __('Create an Account!') }}</a>
-                                    </div>
-                                    @endif
+                                    {{ __('Forgot Password?') }}
+                                    </a>
                             </div>
+                            @endif --}}
+
+                            @if (Route::has('register'))
+                            <div class="text-center">
+                                <a class="big text-success"
+                                    href="{{ route('register') }}">{{ __('Belum punya account? Buat Account!') }}</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
