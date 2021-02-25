@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title','Kemenag Bantul - Dashboard User')
 @section('main-content')
 
 <!-- Page Heading -->
