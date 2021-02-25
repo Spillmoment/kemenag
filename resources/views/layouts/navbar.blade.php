@@ -12,11 +12,12 @@
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="{{ route('profile') }}">
+            <a class="dropdown-item {{ request()->is('user/profile') ? 'active' : '' }}" href="{{ route('profile') }}">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 {{ __('Profile') }}
             </a>
-            <a class="dropdown-item" href="{{ route('changepassword') }}">
+            <a class="dropdown-item {{ request()->is('user/ubah-password') ? 'active' : '' }}"
+                href="{{ route('changepassword') }}">
                 <i class="fa fa-unlock-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 {{ __('Ubah Password') }}
             </a>
@@ -38,7 +39,8 @@
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="{{ route('admin.profil') }}">
+            <a class="dropdown-item {{ request()->is('admin/profile') ? 'active' : '' }}"
+                href="{{ route('admin.profil') }}">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 {{ __('Profile') }}
             </a>
