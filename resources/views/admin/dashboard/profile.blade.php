@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('title','Profile Admin')
 @section('main-content')
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-success">Profile {{ Auth::user()->name }}</h1>
