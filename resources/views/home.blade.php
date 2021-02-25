@@ -3,7 +3,7 @@
 @section('main-content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Dashboard') }} {{ Auth::user()->name }}</h1>
+<h1 class="h3 mb-4 text-success font-weight-700">{{ __('Dashboard') }} {{ Auth::user()->name }}</h1>
 
 @if (session('success'))
 <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -24,23 +24,36 @@
 
     <div class="jumbotron text-success font-weight-700">
         <div class="container">
-            <h1 class="display-4 text-capitalize">Selamat datang di website kemenag</h1>
+            <h1 class="display-6 text-capitalize">Selamat Datang Di Aplikasi Pendaftaran Online TPA/TPQ, Madin & Majelis
+                Taklim Kemenag Bantul</h1>
 
+
+            @if (Auth::user()->lembaga_id != null)
             @if (Auth::user()->status != '1')
-            <div class="alert alert-warning font-weight-700" role="alert">
-                <div style="font-size: 15px">
+            <div class="alert alert-warning font-weight-700 my-3 py-3" role="alert">
+                <div style="font-size: 16px">
                     <strong>Silahkan menunggu verifikasi berkas dari admin, jika sudah ter-verifikasi maka akan dikirim
                         berkas lanjutan</strong>
                 </div>
             </div>
             @else
-            <div class="alert alert-success font-weight-700" role="alert">
-                <div style="font-size: 15px">
+            <div class="alert alert-success font-weight-700 my-3 py-3" role="alert">
+                <div style="font-size: 16px">
                     <strong>selamat berkas anda telah diverifikasi oleh admin, silahkan unduh <a
                             href="/storage/file/{{ Auth::user()->surat->file }}" target="_blank">disini</a></strong>
                 </div>
             </div>
             @endif
+            @else
+            <div class="alert alert-warning font-weight-700 my-3 py-3" role="alert">
+                <div style="font-size: 16px">
+                    <strong>Silahkan terlebih dahulu melengkapi profil data diri & berkas file setelah itu bisa
+                        diverifikasi oleh admin</strong>
+                </div>
+            </div>
+            @endif
+
+
             <hr class="my-2">
             <p class="lead">
                 <a class="btn btn-success btn-lg" href="{{ route('profile') }}" role="button">Lihat Profil</a>
