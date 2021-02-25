@@ -143,7 +143,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="nama_pendiri">Nama Pendiri<span
                                             class="small text-danger">*</span></label>
-                                    <input type="text" id="nama_pendiri" class="form-control @error('email') is-invalid @enderror" name="nama_pendiri" placeholder="example@example.com" value="{{ old('nama_pendiri', Auth::user()->nama_pendiri) }}">
+                                    <input type="text" id="nama_pendiri" class="form-control @error('nama_pendiri') is-invalid @enderror" name="nama_pendiri" placeholder="Nama Pendiri" value="{{ old('nama_pendiri', Auth::user()->nama_pendiri) }}">
                                 </div>
                             </div>
 
@@ -210,20 +210,29 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group focused">
-                                    <label class="form-control-label" for="link_fb">Link Facebook<span class="small text-danger">*</span></label>
+                                    <label class="form-control-label" for="link_fb">Link Facebook</label>
                                     <input type="text" id="link_fb" class="form-control @error('link_fb') is-invalid @enderror" name="link_fb" placeholder="Link Facebook" value="{{ old('link_fb', Auth::user()->link_fb) }}">
                                 </div>
                             </div>   
                             
                             <div class="col-lg-6">
                                 <div class="form-group focused">
-                                    <label class="form-control-label" for="link_website">Link Website<span class="small text-danger">*</span></label>
+                                    <label class="form-control-label" for="link_website">Link Website</label>
                                     <input type="text" id="link_website" class="form-control @error('link_website') is-invalid @enderror" name="link_website" placeholder="Link Website" value="{{ old('link_website', Auth::user()->link_website) }}">
                                 </div>
                             </div>
 
                         </div>
 
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="form-group focused">
+                                    <label class="form-control-label" for="link_gmap">Link Google Maps</label>
+                                    <input type="text" id="link_gmap" class="form-control @error('link_gmap') is-invalid @enderror" name="link_gmap" placeholder="Link Google Maps" value="{{ old('link_gmap', Auth::user()->link_gmap) }}">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-lg">
                                 <div class="form-group">
@@ -234,29 +243,6 @@
                         </div>
 
 
-                        {{-- <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="current_password">Current password</label>
-                                    <input type="password" id="current_password" class="form-control"
-                                        name="current_password" placeholder="Current password">
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="new_password">New password</label>
-                                    <input type="password" id="new_password" class="form-control" name="new_password"
-                                        placeholder="New password">
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group focused">
-                                    <label class="form-control-label" for="confirm_password">Confirm password</label>
-                                    <input type="password" id="confirm_password" class="form-control"
-                                        name="password_confirmation" placeholder="Confirm password">
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <!-- Button -->
