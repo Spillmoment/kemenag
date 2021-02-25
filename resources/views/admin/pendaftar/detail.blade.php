@@ -23,7 +23,7 @@
 <div class="row">
 
 
-    <div class="col-lg-9 order-lg-1">
+    <div class="col-lg-8 order-lg-1">
 
         <div class="card shadow mb-4">
 
@@ -57,22 +57,25 @@
 
                     <tr>
                         <th>Alamat</th>
-                        <th>{{ $user->alamat ? $user->alamat : 'alamat belum diisi' }}</th>
+                        <th>{{ $user->alamat ? $user->alamat : '<span class="alert alert-warning font-weight-bold">alamat belum diisi</span>' }}
+                        </th>
                     </tr>
 
                     <tr>
                         <th>Nomor Telepon</th>
-                        <th>{{ $user->no_telp ? $user->no_telp : 'no_telp belum diisi' }}</th>
+                        <th>{{ $user->no_telp ? $user->no_telp : '<span class="alert alert-warning font-weight-bold">no_telepon belum diisi</span>' }}
+                        </th>
                     </tr>
 
                     <tr>
                         <th>Nama Pimpinan</th>
-                        <th>{{ $user->nama_pimpinan ? $user->nama_pimpinan : 'Nama Pimpinan belum diisi' }}</th>
+                        <th>{{ $user->nama_pimpinan ? $user->nama_pimpinan : '<span class="alert alert-warning font-weight-bold">Nama Pimpinan belum diisi</span>' }}
+                        </th>
                     </tr>
 
                     <tr>
                         <th>Tahun Berdiri</th>
-                        <th>{{ $user->tahun_berdiri ? $user->tahun_berdiri : 'Tahun Berdiri belum diisi' }}
+                        <th>{{ $user->tahun_berdiri ? $user->tahun_berdiri : '<span class="alert alert-warning font-weight-bold">Tahun Berdiri belum diisi</span>' }}
                         </th>
                     </tr>
 
@@ -83,24 +86,27 @@
                             <a href="/storage/susunanPengurus/{{ $user->susunan_pengurus }}" target="_blank">
                                 {{ $user->susunan_pengurus }} </a>
                             @else
-                            Susunan Pengurus belum diupload
+                            <span class="alert alert-warning font-weight-bold">File Belum diupload</span>
                             @endif
                         </th>
                     </tr>
 
                     <tr>
                         <th>Nama Pendiri</th>
-                        <th>{{ $user->nama_pendiri ? $user->nama_pendiri : 'Nama Pendiri belum diisi' }}</th>
+                        <th>{{ $user->nama_pendiri ? $user->nama_pendiri : '<span class="alert alert-warning font-weight-bold">Nama Pendiri belum diisi</span>' }}
+                        </th>
                     </tr>
 
                     <tr>
                         <th>Jumlah Guru</th>
-                        <th>{{ $user->jumlah_guru ? $user->jumlah_guru : 'Jumlah Guru belum diisi' }}</th>
+                        <th>{{ $user->jumlah_guru ? $user->jumlah_guru : '<span class="alert alert-warning font-weight-bold">Jumlah Guru belum diisi</span>' }}
+                        </th>
                     </tr>
 
                     <tr>
                         <th>Jumlah Siswa</th>
-                        <th>{{ $user->jumlah_siswa ? $user->jumlah_siswa : 'Jumlah Siswa belum diisi' }}</th>
+                        <th>{{ $user->jumlah_siswa ? $user->jumlah_siswa : '<span class="alert alert-warning font-weight-bold">Jumlah Guru belum diisi</span>' }}
+                        </th>
                     </tr>
 
                     <tr>
@@ -110,7 +116,7 @@
                             <a href="/storage/jadwalKegiatan/{{ $user->jadwal_kegiatan }}" target="_blank">
                                 {{ $user->jadwal_kegiatan }} </a>
                             @else
-                            Jadwal Kegiatan belum diupload
+                            <span class="alert alert-warning font-weight-bold">File Belum diupload</span>
                             @endif
                         </th>
                     </tr>
@@ -122,7 +128,7 @@
                             <a href="/storage/fotoKegiatan/{{ $user->foto_kegiatan }}" target="_blank">
                                 {{ $user->foto_kegiatan }} </a>
                             @else
-                            Jadwal Kegiatan belum diupload
+                            <span class="alert alert-warning font-weight-bold">File Belum diupload</span>
                             @endif
                         </th>
                     </tr>
@@ -144,7 +150,7 @@
                             @if ($user->link_fb != null)
                             <a href="{{ $user->link_fb }}" target="_blank"> {{ $user->link_fb }} </a>
                             @else
-                            Link Facebook belum diisi
+                            <span class="alert alert-warning font-weight-bold">Link Facebook belum diisi</span>
                             @endif
                         </th>
                     </tr>
@@ -155,7 +161,7 @@
                             @if ($user->link_website != null)
                             <a href="{{ $user->link_website }}" target="_blank"> {{ $user->link_website }} </a>
                             @else
-                            Link Website belum diisi
+                            <span class="alert alert-warning font-weight-bold">Link Website belum diisi</span>
                             @endif
                         </th>
                     </tr>
@@ -166,7 +172,7 @@
                             @if ($user->link_gmap != null)
                             <a href="{{ $user->link_gmap }}" target="_blank"> {{ $user->link_gmap }} </a>
                             @else
-                            Link Google Maps belum diisi
+                            <span class="alert alert-warning font-weight-bold">Link Google Maps belum diisi</span>
                             @endif
                         </th>
                     </tr>
@@ -177,11 +183,11 @@
                         <th>
                             @if($user->status == 1)
                             <span class="badge badge-success">
-                                Sudah Dikonfirmasi
+                                <h6 class="py-1">Sudah Dikonfirmasi</h6>
                             </span>
                             @else
                             <span class="badge badge-danger">
-                                Belum Dikonfirmasi
+                                <h6 class="py-1"> Belum Dikonfirmasi</h6>
                             </span>
                             @endif
                         </th>
@@ -206,7 +212,7 @@
 
     </div>
 
-    <div class="col-lg-3 order-lg-1">
+    <div class="col-lg-4 order-lg-1">
         @if ($user->status == '1')
         @if ($user->surat_id == null)
         <h5 class="text-success my-2">Upload Surat Keterangan</h5>
