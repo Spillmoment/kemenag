@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 
+@section('title','Login TPA/TPQ, Madin & Majelis Taklim Kemenag Bantul')
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">
@@ -12,7 +13,7 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h3 text-success mb-4 font-weight-900">
-                                        {{ __('Pendaftaran Online TPA/TPQ, Madin & Majelis Taklim Kemenag Bantul') }}
+                                        {{ __('Halaman Login TPA/TPQ, Madin & Majelis Taklim Kemenag Bantul') }}
                                     </h1>
                                 </div>
 

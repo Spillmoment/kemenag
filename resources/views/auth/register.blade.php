@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 
+@section('title','Pendaftaran Online TPA/TPQ, Madin & Majelis Taklim Kemenag Bantul')
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">
