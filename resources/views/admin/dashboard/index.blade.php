@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('title','Dashboard Admin')
 @section('main-content')
 
 <!-- Page Heading -->
