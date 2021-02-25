@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('title','File User')
 @section('main-content')
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-success font-weight-700">File Lembaga {{ auth()->user()->name }}</h1>
@@ -79,7 +81,8 @@
 
             <div class="card-body">
 
-                <form method="POST" action="{{ route('files.update') }}" autocomplete="off" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('files.update') }}" autocomplete="off"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -88,16 +91,20 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group focused">
-                                    <label class="form-control-label" for="susunan_pengurus">Susunan Pengurus<span class="small text-danger">*</span></label>
-                                    <input type="file" id="susunan_pengurus" class="form-control-file" name="susunan_pengurus">
+                                    <label class="form-control-label" for="susunan_pengurus">Susunan Pengurus<span
+                                            class="small text-danger">*</span></label>
+                                    <input type="file" id="susunan_pengurus" class="form-control-file"
+                                        name="susunan_pengurus">
                                     <small>Kosongkan jika tidak mengubah file pdf</small>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group focused">
-                                    <label class="form-control-label" for="jadwal_kegiatan">Jadwal Kegiatan<span class="small text-danger">*</span></label>
-                                    <input type="file" id="jadwal_kegiatan" class="form-control-file" name="jadwal_kegiatan">
+                                    <label class="form-control-label" for="jadwal_kegiatan">Jadwal Kegiatan<span
+                                            class="small text-danger">*</span></label>
+                                    <input type="file" id="jadwal_kegiatan" class="form-control-file"
+                                        name="jadwal_kegiatan">
                                     <small>Kosongkan jika tidak mengubah file pdf</small>
                                 </div>
                             </div>
@@ -105,13 +112,15 @@
                         </div>
 
 
-                            
+
 
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group focused">
-                                    <label class="form-control-label" for="foto_kegiatan">Foto Kegiatan<span class="small text-danger">*</span></label>
-                                    <input type="file" id="foto_kegiatan" class="form-control-file" name="foto_kegiatan">
+                                    <label class="form-control-label" for="foto_kegiatan">Foto Kegiatan<span
+                                            class="small text-danger">*</span></label>
+                                    <input type="file" id="foto_kegiatan" class="form-control-file"
+                                        name="foto_kegiatan">
                                     <small>Kosongkan jika tidak mengubah file pdf</small>
                                 </div>
                             </div>
