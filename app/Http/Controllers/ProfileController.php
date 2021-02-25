@@ -33,18 +33,13 @@ class ProfileController extends Controller
             'no_telp' => 'required|string|digits:12',
             'nama_pimpinan' => 'required|string|max:255',
             'tahun_berdiri' => 'required|date',
-            // 'susunan_pengurus' => 'required|string',
             'nama_pendiri' => 'required|string|max:255',
             'jumlah_guru' => 'required|integer|min:0',
             'jumlah_santri' => 'required|integer|min:0',
             'tempat_kbm' => 'required|string|max:255',
-            // 'jadwal_kegiatan' => 'required|string',
-            // 'foto_kegiatan' => 'required|string',
             'link_fb' => 'nullable|string|max:255',
             'link_website' => 'nullable|string|max:255',
-            // 'current_password' => 'nullable|required_with:new_password',
-            // 'new_password' => 'nullable|min:8|max:12|required_with:current_password',
-            // 'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
+            'link_gmap' => 'nullable|string|max:255'
         ]);
 
         $user = User::findOrFail(Auth::user()->id);
@@ -64,15 +59,7 @@ class ProfileController extends Controller
         $user->foto_kegiatan = $request->input('foto_kegiatan');
         $user->link_fb = $request->input('link_fb');
         $user->link_website = $request->input('link_website');
-
-        if (!is_null($request->input('current_password'))) {
-            if (Hash::check($request->input('current_password'), $user->password)) {
-                $user->password = $request->input('new_password');
-            } else {
-                return redirect()->back()->withInput();
-            }
-        }
-
+        $user->link_gmap = $request->input('link_gmap');
         $user->save();
 
         return redirect()->route('profile')->with(['status' => 'Profil berhasil diupdate']);
@@ -80,7 +67,9 @@ class ProfileController extends Controller
 
     public function files()
     {
-        return view('file');
+        $id_lembaga = Auth::user()->id;
+        $cek_file_user = User::findOrFail($id_lembaga);
+        return view('file', compact('cek_file_user'));
     }
 
     public function updateFile(Request $request){
@@ -191,6 +180,35 @@ class ProfileController extends Controller
             session()->flash('status', 'File foto kegiatan berhasil diubah');
             return redirect()->back();
         }
+
+    }
+
+    public function changePassword()
+    {
+        return view('ubah_password');
+    }
+
+    public function setChangePassword(Request $request)
+    {
+        $request->validate([
+            'password_sekarang' => 'nullable|required_with:password_baru',
+            'password_baru' => 'nullable|min:8|max:12|required_with:password_sekarang',
+            'password_konfirmasi' => 'nullable|min:8|max:12|required_with:password_baru|same:password_baru'
+        ]);
+
+        $user = User::findOrFail(Auth::user()->id);
+        if (!is_null($request->input('password_sekarang'))) {
+            if (Hash::check($request->input('password_sekarang'), $user->password)) {
+                $user->password = $request->input('password_baru');
+            } else {
+                return redirect()->back()->withInput();
+            }
+        }
+
+        $user->save();
+
+
+        return redirect()->back()->with(['status' => 'Password berhasil diupdate']);
 
     }
 }
