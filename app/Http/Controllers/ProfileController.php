@@ -20,7 +20,7 @@ class ProfileController extends Controller
     public function index()
     {
         $getdata_lembaga = Lembaga::all();
-        return view('profile', compact('getdata_lembaga'));
+        return view('user.profile', compact('getdata_lembaga'));
     }
 
     public function update(Request $request)
@@ -69,7 +69,7 @@ class ProfileController extends Controller
     {
         $id_lembaga = Auth::user()->id;
         $cek_file_user = User::findOrFail($id_lembaga);
-        return view('file', compact('cek_file_user'));
+        return view('user.file', compact('cek_file_user'));
     }
 
     public function updateFile(Request $request)
@@ -185,7 +185,7 @@ class ProfileController extends Controller
 
     public function changePassword()
     {
-        return view('ubah_password');
+        return view('user.ubah_password');
     }
 
     public function setChangePassword(Request $request)
@@ -203,12 +203,11 @@ class ProfileController extends Controller
             } else {
                 return redirect()->back()->withInput();
             }
+        } elseif ($request->input('password_sekarang') != $user->password) {
+            return redirect()->back()->withInput();;
         }
 
         $user->save();
-
-
         return redirect()->back()->with(['status' => 'Password berhasil diupdate']);
-
     }
 }
