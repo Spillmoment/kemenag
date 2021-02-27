@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
 use App\Surat;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
 
 class PendaftarController extends Controller
 {
@@ -65,6 +67,29 @@ class PendaftarController extends Controller
         } catch (\Exception $e) {
             return redirect()->back();
         }
+    }
+
+    public function password($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.pendaftar.ubah_password', compact('user'));
+    }
+
+    public function update_password(Request $request, $id)
+    {
+        $request->validate([
+            'password'              => 'sometimes|nullable|min:8|max:12|',
+            'konfirmasi_password'   => 'sometimes|same:password|nullable|min:8|max:12|',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if ($request->input('password')) {
+            $user->password = $request->password;
+        }
+
+        $user->save();
+        return redirect()->back()->with(['status' => 'Password berhasil diupdate']);
     }
 
     public function destroy($id)
