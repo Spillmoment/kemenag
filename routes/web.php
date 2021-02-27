@@ -17,6 +17,7 @@ Route::prefix('user')
         Route::put('/files', 'ProfileController@updateFile')->name('files.update');
         Route::get('/ubah-password', 'ProfileController@changePassword')->name('changepassword');
         Route::put('/ubah-password', 'ProfileController@setChangePassword')->name('changepassword.update');
+        Route::get('formulir_pdf', 'ProfileController@cetak_pdf')->name('cetak.formulir');
     });
 
 Route::prefix('admin')
