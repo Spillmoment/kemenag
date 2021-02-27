@@ -61,7 +61,8 @@
                         <td>
                             <a class="btn btn-info text-white btn-sm" href="{{route('pendaftar.detail',
                            [$regis->id])}}"> <i class="fa fa-eye"></i></a>
-
+                            <a class="btn btn-warning text-white btn-sm" href="{{route('user.password',
+                             [$regis->id])}}"> <i class="fa fa-edit"></i></a>
                             <form class="d-inline" action="{{route('pendaftar.destroy', [$regis->id])}}" method="POST">
                                 @method('DELETE')
                                 @csrf
