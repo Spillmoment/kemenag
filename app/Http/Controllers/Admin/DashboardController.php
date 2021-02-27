@@ -12,22 +12,22 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::count();
+        $users = User::where('roles', 'user')->count();
         $tpa = User::with('lembaga')
             ->where('lembaga_id', 1)
             ->count();
-        $tpq = User::with('lembaga')
+        $madin = User::with('lembaga')
             ->where('lembaga_id', 2)
             ->count();
-        $madin = User::with('lembaga')
+        $majlis = User::with('lembaga')
             ->where('lembaga_id', 3)
             ->count();
 
         $widget = [
             'users' => $users,
             'tpa' => $tpa,
-            'tpq' => $tpq,
-            'madin' => $madin
+            'madin' => $madin,
+            'majlis' => $majlis,
         ];
 
         return view('admin.dashboard.index', compact('widget'));
