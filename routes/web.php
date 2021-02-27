@@ -35,4 +35,6 @@ Route::prefix('admin')
         Route::delete('/pendaftar/{id}', 'Admin\PendaftarController@destroy')->name('pendaftar.destroy');
         Route::post('/surat/upload/{id}', 'Admin\SuratController@store')->name('surat.upload');
         Route::put('/surat/upload/{id}', 'Admin\SuratController@update')->name('surat.update');
+        Route::get('/user/update_password/{id}', 'Admin\PendaftarController@password')->name('user.password');
+        Route::put('/user/update_password/{id}', 'Admin\PendaftarController@update_password')->name('user.password.update');
     });
