@@ -70,7 +70,17 @@
         <div class="card shadow mb-4">
 
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-success">Account {{ auth()->user()->name }}</h6>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="m-0 font-weight-bold text-success">Account {{ auth()->user()->name }}</h6>
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
+                        <h6 class="m-0 font-weight-bold"><a href="{{ route('cetak.formulir') }}" class="text-success">
+                                <i class="fas fa-print"></i>
+                                Cetak Formulir</a></h6>
+                    </div>
+                </div>
             </div>
 
             <div class="card-body">
@@ -99,12 +109,18 @@
                                     <select name="lembaga_id" id="lembaga_id"
                                         class="form-control @error('lembaga_id') is-invalid @enderror">
                                         @foreach ($getdata_lembaga as $lembaga)
+
+                                        @if (Auth::user()->lembaga_id != null)
                                         <option value="{{ $lembaga->id }}" @if ($lembaga->id ===
                                             auth()->user()->lembaga->id)
                                             selected
                                             @endif
                                             >
                                             {{ $lembaga->name }}
+                                            @else
+                                        <option value="{{ $lembaga->id }}">{{ $lembaga->name }}</option>
+                                        @endif
+
                                         </option>
                                         @endforeach
                                     </select>
@@ -272,7 +288,7 @@
                                     <label class="form-control-label" for="alamat">Alamat Lembaga<span
                                             class="small text-danger">*</span></label>
                                     <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                        id="alamat" rows="10">{{ Auth::user()->alamat }}</textarea>
+                                        id="alamat" rows="10">{{ old('alamat',Auth::user()->alamat) }}</textarea>
                                 </div>
                             </div>
                         </div>
