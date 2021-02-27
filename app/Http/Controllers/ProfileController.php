@@ -203,7 +203,7 @@ class ProfileController extends Controller
                 return redirect()->back()->withInput();
             }
         } elseif ($request->input('password_sekarang') != $user->password) {
-            return redirect()->back()->withInput();;
+            return redirect()->back()->withInput();
         }
 
         $user->save();
