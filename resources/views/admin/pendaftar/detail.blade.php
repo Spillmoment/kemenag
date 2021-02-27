@@ -3,7 +3,7 @@
 @section('title','Detail User')
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-success font-weight-700">Detail Pendaftar {{ $user->name }} </h1>
+<h1 class="h3 mb-4 text-success font-weight-700">Detail Lembaga {{ $user->name }} </h1>
 
 @if(session('status'))
 @push('scripts')
@@ -28,7 +28,7 @@
         <div class="card shadow mb-4">
 
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-success">Detail {{ $user->name }}</h6>
+                <h6 class="m-0 font-weight-bold text-success">Table {{ $user->name }}</h6>
             </div>
 
             <table class="table table-hover table-striped">
@@ -36,7 +36,13 @@
 
                     <tr>
                         <th>Jenis Lembaga</th>
-                        <th> {{ $user->lembaga->name ? $user->lembaga->name : 'belum diisi' }} </th>
+                        <th>
+                            @if ($user->lembaga_id != null)
+                            {{ $user->lembaga->name }}
+                            @else
+                            <span class="text-danger"> Lembaga belum diisi</span>
+                            @endif
+                        </th>
                     </tr>
 
                     <tr>
@@ -57,25 +63,45 @@
 
                     <tr>
                         <th>Alamat</th>
-                        <th>{{ $user->alamat ? $user->alamat : '<span class="alert alert-warning font-weight-bold">alamat belum diisi</span>' }}
+                        <th>
+                            @if ($user->alamat != null)
+                            {{ $user->alamat }}
+                            @else
+                            <span class="text-danger">Alamat Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
                     <tr>
                         <th>Nomor Telepon</th>
-                        <th>{{ $user->no_telp ? $user->no_telp : '<span class="alert alert-warning font-weight-bold">no_telepon belum diisi</span>' }}
+                        <th>
+                            @if ($user->no_telp != null)
+                            {{ $user->no_telp }}
+                            @else
+                            <span class="text-danger">No Telp Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
                     <tr>
                         <th>Nama Pimpinan</th>
-                        <th>{{ $user->nama_pimpinan ? $user->nama_pimpinan : '<span class="alert alert-warning font-weight-bold">Nama Pimpinan belum diisi</span>' }}
+                        <th>
+                            @if ($user->nama_pimpinan != null)
+                            {{ $user->nama_pimpinan }}
+                            @else
+                            <span class="text-danger">Nama Pimpinan Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
                     <tr>
                         <th>Tahun Berdiri</th>
-                        <th>{{ $user->tahun_berdiri ? $user->tahun_berdiri : '<span class="alert alert-warning font-weight-bold">Tahun Berdiri belum diisi</span>' }}
+                        <th>
+                            @if ($user->tahun_berdiri != null)
+                            {{ $user->tahun_berdiri }}
+                            @else
+                            <span class="text-danger">Tahun Berdiri Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
@@ -93,19 +119,34 @@
 
                     <tr>
                         <th>Nama Pendiri</th>
-                        <th>{{ $user->nama_pendiri ? $user->nama_pendiri : '<span class="alert alert-warning font-weight-bold">Nama Pendiri belum diisi</span>' }}
+                        <th>
+                            @if ($user->nama_pendiri != null)
+                            {{ $user->nama_pendiri }}
+                            @else
+                            <span class="text-danger">Nama Pendiri Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
                     <tr>
                         <th>Jumlah Guru</th>
-                        <th>{{ $user->jumlah_guru ? $user->jumlah_guru : '<span class="alert alert-warning font-weight-bold">Jumlah Guru belum diisi</span>' }}
+                        <th>
+                            @if ($user->jumlah_guru != null)
+                            {{ $user->jumlah_guru }}
+                            @else
+                            <span class="text-danger">Jumlah Guru Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
                     <tr>
-                        <th>Jumlah Siswa</th>
-                        <th>{{ $user->jumlah_siswa ? $user->jumlah_siswa : '<span class="alert alert-warning font-weight-bold">Jumlah Guru belum diisi</span>' }}
+                        <th>Jumlah Santri</th>
+                        <th>
+                            @if ($user->jumlah_santri != null)
+                            {{ $user->jumlah_santri }}
+                            @else
+                            <span class="text-danger">Jumlah Santri Belum diisi</span>
+                            @endif
                         </th>
                     </tr>
 
@@ -139,7 +180,7 @@
                             @if ($user->surat_id != null)
                             <a href="/storage/file/{{ $user->surat->file }}"> {{ $user->surat->file }} </a>
                             @else
-                            Surat keterangan belum diupload
+                            <span class="alert alert-warning font-weight-bold">File Belum diupload</span>
                             @endif
                         </th>
                     </tr>
@@ -150,7 +191,7 @@
                             @if ($user->link_fb != null)
                             <a href="{{ $user->link_fb }}" target="_blank"> {{ $user->link_fb }} </a>
                             @else
-                            <span class="alert alert-warning font-weight-bold">Link Facebook belum diisi</span>
+                            <span class="text-danger">Link Facebook belum diisi</span>
                             @endif
                         </th>
                     </tr>
@@ -161,7 +202,7 @@
                             @if ($user->link_website != null)
                             <a href="{{ $user->link_website }}" target="_blank"> {{ $user->link_website }} </a>
                             @else
-                            <span class="alert alert-warning font-weight-bold">Link Website belum diisi</span>
+                            <span class="text-danger">Link Website belum diisi</span>
                             @endif
                         </th>
                     </tr>
@@ -172,7 +213,7 @@
                             @if ($user->link_gmap != null)
                             <a href="{{ $user->link_gmap }}" target="_blank"> {{ $user->link_gmap }} </a>
                             @else
-                            <span class="alert alert-warning font-weight-bold">Link Google Maps belum diisi</span>
+                            <span class="text-danger">Link Google Maps belum diisi</span>
                             @endif
                         </th>
                     </tr>
@@ -182,11 +223,11 @@
                         <th>Status </th>
                         <th>
                             @if($user->status == 1)
-                            <span class="badge badge-success">
+                            <span class="btn btn-success btn-sm">
                                 <h6 class="py-1">Sudah Dikonfirmasi</h6>
                             </span>
                             @else
-                            <span class="badge badge-danger">
+                            <span class="btn btn-danger btn-sm">
                                 <h6 class="py-1"> Belum Dikonfirmasi</h6>
                             </span>
                             @endif
@@ -283,7 +324,7 @@
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "Konfirmasi Pendaftar  " + name + "?",
+                text: "Konfirmasi Lembaga " + name + "?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {

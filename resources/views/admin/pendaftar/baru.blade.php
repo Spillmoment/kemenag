@@ -45,8 +45,8 @@
                         <td>{{ $regis->name }}</td>
                         <td>{{ $regis->email }}</td>
                         <td>
-                            {{-- <a class="btn btn-info text-white btn-sm" href="{{route('pendaftar.detail',
-                           [$regis->id])}}"> <i class="fa fa-eye"></i></a> --}}
+                            <a class="btn btn-info text-white btn-sm" href="{{route('pendaftar.detail',
+                           [$regis->id])}}"> <i class="fa fa-eye"></i></a>
 
                             <form class="d-inline" action="{{route('pendaftar.destroy', [$regis->id])}}" method="POST">
                                 @method('DELETE')

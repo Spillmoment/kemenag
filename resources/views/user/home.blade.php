@@ -57,7 +57,11 @@
 
             <hr class="my-2">
             <p class="lead">
+                @if (Auth::user()->lembaga_id != null)
                 <a class="btn btn-success btn-lg" href="{{ route('profile') }}" role="button">Lihat Profil</a>
+                @else
+                <a class="btn btn-success btn-lg" href="{{ route('profile') }}" role="button">Lengkapi Profil</a>
+                @endif
             </p>
         </div>
     </div>

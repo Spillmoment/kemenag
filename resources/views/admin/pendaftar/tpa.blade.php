@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
-@section('title','Pendaftar TPA/TPQ')
+@section('title','Lembaga TPA/TPQ')
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-success font-weight-700">Daftar Pendaftar TPA/TPQ</h1>
+<h1 class="h3 mb-4 text-success font-weight-700">Daftar Lembaga TPA/TPQ</h1>
 
 @if(session('status'))
 @push('scripts')
