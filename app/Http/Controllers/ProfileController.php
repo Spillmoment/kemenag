@@ -7,8 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ProfileController extends Controller
 {
@@ -209,5 +208,13 @@ class ProfileController extends Controller
 
         $user->save();
         return redirect()->back()->with(['status' => 'Password berhasil diupdate']);
+    }
+
+    public function cetak_pdf()
+    {
+        $tgl = now();
+        $user = User::with('lembaga')->where('id', Auth::id())->first();
+        $pdf = PDF::loadview('user.report.formulir_pdf', ['user' => $user]);
+        return $pdf->download('formulir-pendaftaran-' . $user->name . '-' . $tgl . '.pdf');
     }
 }
